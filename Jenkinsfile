@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        HUB_HOST = 172.18.0.2  // Replace with the actual IP address of the Selenium Hub
+        HUB_HOST = "172.18.0.2"  // Replace with the actual IP address of the Selenium Hub
     }
     stages {
         stage("Checkout") {
