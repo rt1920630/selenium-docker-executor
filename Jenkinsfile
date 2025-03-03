@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat "docker-compose up search-module"
+                        bat "docker-compose up"
                     } catch (Exception e) {
                         echo "Test failed: ${e.message}"
                     }
