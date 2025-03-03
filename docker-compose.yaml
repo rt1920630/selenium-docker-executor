@@ -53,7 +53,7 @@ services:
       - edge
     environment:
       HUB_HOST: 'hub'
-      BROWSER: 'chrome'  # or any other browser
+      browser: 'chrome'  # or any other browser
       MODULE: 'testng.xml'  # or the path to your TestNG XML file
       SE_ENABLE_TRACING: 'false'
     networks:
