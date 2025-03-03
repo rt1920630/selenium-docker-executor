@@ -18,10 +18,12 @@ pipeline {
         }
         stage("Run Test") {
             steps {
-                try {
-                    bat "docker-compose up search-module"
-                } catch (Exception e) {
-                    echo "Test failed: ${e.message}"
+                script {
+                    try {
+                        bat "docker-compose up search-module"
+                    } catch (Exception e) {
+                        echo "Test failed: ${e.message}"
+                    }
                 }
             }
         }
