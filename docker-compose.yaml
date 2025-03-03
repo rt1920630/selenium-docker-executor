@@ -1,0 +1,66 @@
+version: '3.8'
+services:
+  hub:
+    image: selenium/hub:4.25.0
+    ports:
+      - "4442-4444:4442-4444"
+    environment:
+      SE_ENABLE_TRACING: 'false'
+    networks:
+      - selenium-grid
+
+  chrome:
+    image: selenium/node-chrome:4.25.0
+    depends_on:
+      - hub
+    environment:
+      SE_EVENT_BUS_HOST: 'hub'
+      SE_EVENT_BUS_PUBLISH_PORT: '4442'
+      SE_EVENT_BUS_SUBSCRIBE_PORT: '4443'
+      SE_ENABLE_TRACING: 'false'
+    networks:
+      - selenium-grid
+
+  firefox:
+    image: selenium/node-firefox:4.25.0
+    depends_on:
+      - hub
+    environment:
+      SE_EVENT_BUS_HOST: 'hub'
+      SE_EVENT_BUS_PUBLISH_PORT: '4442'
+      SE_EVENT_BUS_SUBSCRIBE_PORT: '4443'
+      SE_ENABLE_TRACING: 'false'
+    networks:
+      - selenium-grid
+
+  edge:
+    image: selenium/node-edge:4.25.0
+    depends_on:
+      - hub
+    environment:
+      SE_EVENT_BUS_HOST: 'hub'
+      SE_EVENT_BUS_PUBLISH_PORT: '4442'
+      SE_EVENT_BUS_SUBSCRIBE_PORT: '4443'
+      SE_ENABLE_TRACING: 'false'
+    networks:
+      - selenium-grid
+  
+  search_module:
+    image: rt536/selenium-docker
+    depends_on:
+      - chrome
+      - firefox
+      - edge
+    environment:
+      HUB_HOST: 'hub'
+      BROWSER: 'chrome'  # or any other browser
+      MODULE: 'testng.xml'  # or the path to your TestNG XML file
+      SE_ENABLE_TRACING: 'false'
+    networks:
+      - selenium-grid
+    volumes:
+      - ./output:/Testcases_automation/automation/test-output
+
+networks:
+  selenium-grid:
+    driver: bridge
