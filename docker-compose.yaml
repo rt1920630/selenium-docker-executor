@@ -52,9 +52,9 @@ services:
       - firefox
       - edge
     environment:
-      HUB_HOST: 'hub'
-      browser: 'chrome'  # or any other browser
-      MODULE: 'testng.xml'  # or the path to your TestNG XML file
+      HUB_HOST: hub
+      browser: chrome  # or any other browser
+      MODULE: testng.xml  # or the path to your TestNG XML file
       SE_ENABLE_TRACING: 'false'
     networks:
       - selenium-grid
