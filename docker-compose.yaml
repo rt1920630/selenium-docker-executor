@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   hub:
     image: selenium/hub:4.25.0
@@ -44,22 +44,6 @@ services:
       - SE_ENABLE_TRACING=false
     networks:
       - selenium-grid
-  
-  search_module:
-    image: rt536/selenium-docker
-    depends_on:
-      - chrome
-      - firefox
-      - edge
-    environment:
-      - HUB_HOST=172.18.0.2
-      - browser=chrome  # or any other browser
-      - MODULE=testng.xml  # or the path to your TestNG XML file
-      - SE_ENABLE_TRACING=false
-    networks:
-      - selenium-grid
-    volumes:
-      - ./output:/Testcases_automation/automation/test-output
 
 networks:
   selenium-grid:
