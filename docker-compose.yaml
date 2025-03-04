@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   hub:
     image: selenium/hub:4.25.0
@@ -44,6 +44,21 @@ services:
       - SE_ENABLE_TRACING=false
     networks:
       - selenium-grid
+  
+  search_module:
+    image: rt536/selenium-docker
+    depends_on:
+      - chrome
+      - firefox
+      - edge
+    environment:
+      - HUB_HOST=hub
+      - browser=chrome  # or any other browser
+      - SE_ENABLE_TRACING=false
+    networks:
+      - selenium-grid
+    volumes:
+      - ./output:/Testcases_automation/automation/test-output
 
 networks:
   selenium-grid:
